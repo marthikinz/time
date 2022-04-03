@@ -112,10 +112,7 @@ export default Overview
                 class='overview-calendar'
                 :options='calendarOptions'
             >
-<!--                <template v-slot:eventContent='arg'>-->
-<!--                    <b>{{ arg.timeText }}</b>-->
-<!--                    <i>{{ arg.event.title }}</i>-->
-<!--                </template>-->
+
             </FullCalendar>
         </div>
     </div>
@@ -165,9 +162,5 @@ b { /* used for event dates/times */
     padding: 3em;
 }
 
-/*.fc { !* the calendar root *!*/
-/*    max-width: 1100px;*/
-/*    margin: 0 auto;*/
-/*}*/
 
 </style>
