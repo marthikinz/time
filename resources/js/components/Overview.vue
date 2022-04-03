@@ -31,6 +31,8 @@ const Overview = defineComponent({
                 selectMirror: true,
                 dayMaxEvents: true,
                 weekends: true,
+                fixedWeekCount: false,
+                showNonCurrentDates: false,
                 select: this.handleDateSelect,
                 eventClick: this.handleEventClick,
                 eventsSet: this.handleEvents
