@@ -6,14 +6,17 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { INITIAL_EVENTS, createEventId } from '../event-utils'
-import {getHeight} from "../display-utils";
+import { getHeight } from "../display-utils";
+import TimeEntryModal from "./modal/TimeEntryModal.vue";
 
 const Overview = defineComponent({
     components: {
         FullCalendar,
+        TimeEntryModal
     },
     data() {
         return {
+            isDayClicked: false,
             calendarOptions: {
                 plugins: [
                     dayGridPlugin,
@@ -52,7 +55,8 @@ const Overview = defineComponent({
             this.calendarOptions.weekends = !this.calendarOptions.weekends // update a property
         },
         handleDateSelect(selectInfo: DateSelectArg) {
-            let title = prompt('Please enter a new title for your event')
+            this.isDayClicked = true;
+            let title = 'abc'; //prompt('Please enter a new title for your event')
             let calendarApi = selectInfo.view.calendar
 
             calendarApi.unselect() // clear date selection
@@ -75,6 +79,9 @@ const Overview = defineComponent({
         handleEvents(events: EventApi[]) {
             this.currentEvents = events
         },
+        closeModal() {
+            this.isDayClicked = false;
+        }
     }
 })
 export default Overview
@@ -88,7 +95,6 @@ export default Overview
                 <ul>
                     <li>Select dates and you will be prompted to create a new event</li>
                     <li>Drag, drop, and resize events</li>
-                    <li>Click an event to delete it</li>
                 </ul>
             </div>
             <div class='overview-sidebar-section'>
@@ -113,6 +119,7 @@ export default Overview
         </div>
         <div class='overview-main'>
             <FullCalendar
+
                 class='overview-calendar'
                 :options='calendarOptions'
             >
@@ -120,9 +127,13 @@ export default Overview
             </FullCalendar>
         </div>
     </div>
+    <TimeEntryModal
+        v-show="isDayClicked"
+        @close="closeModal"
+   />
 </template>
 
-<style lang='css'>
+<style lang='css' scoped>
 
 h2 {
     margin: 0;
