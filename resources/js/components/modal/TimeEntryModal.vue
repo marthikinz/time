@@ -41,7 +41,7 @@ export default {
     name: "TimeEntryModal",
     methods: {
         close() {
-            this.$emit('close');
+            this.$emit('close', "mmm");
         },
     },
 }

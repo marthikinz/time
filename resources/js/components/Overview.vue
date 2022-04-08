@@ -1,7 +1,7 @@
 <script lang='ts'>
 import { defineComponent } from 'vue'
 import '@fullcalendar/core/vdom' // solve problem with Vite
-import FullCalendar, { CalendarOptions, EventApi, DateSelectArg, EventClickArg } from '@fullcalendar/vue3'
+import FullCalendar, {CalendarOptions, EventApi, DateSelectArg, EventClickArg} from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
@@ -17,6 +17,7 @@ const Overview = defineComponent({
     data() {
         return {
             isDayClicked: false,
+            daySelectedInfo: {} as DateSelectArg,
             calendarOptions: {
                 plugins: [
                     dayGridPlugin,
@@ -55,21 +56,9 @@ const Overview = defineComponent({
             this.calendarOptions.weekends = !this.calendarOptions.weekends // update a property
         },
         handleDateSelect(selectInfo: DateSelectArg) {
+            this.daySelectedInfo = selectInfo;
+
             this.isDayClicked = true;
-            let title = 'abc'; //prompt('Please enter a new title for your event')
-            let calendarApi = selectInfo.view.calendar
-
-            calendarApi.unselect() // clear date selection
-
-            if (title) {
-                calendarApi.addEvent({
-                    id: createEventId(),
-                    title,
-                    start: selectInfo.startStr,
-                    end: selectInfo.endStr,
-                    allDay: selectInfo.allDay
-                })
-            }
         },
         handleEventClick(clickInfo: EventClickArg) {
             if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
@@ -79,8 +68,20 @@ const Overview = defineComponent({
         handleEvents(events: EventApi[]) {
             this.currentEvents = events
         },
-        closeModal() {
+        closeModal(title: string) {
             this.isDayClicked = false;
+            let calendarApi = this.daySelectedInfo.view.calendar;
+            calendarApi.unselect() // clear date selection
+
+            if (title) {
+                calendarApi.addEvent({
+                    id: createEventId(),
+                    title,
+                    start: this.daySelectedInfo.startStr,
+                    end: this.daySelectedInfo.endStr,
+                    allDay: this.daySelectedInfo.allDay
+                })
+            }
         }
     }
 })
