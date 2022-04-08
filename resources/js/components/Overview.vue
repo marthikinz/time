@@ -57,7 +57,6 @@ const Overview = defineComponent({
         },
         handleDateSelect(selectInfo: DateSelectArg) {
             this.daySelectedInfo = selectInfo;
-
             this.isDayClicked = true;
         },
         handleEventClick(clickInfo: EventClickArg) {
