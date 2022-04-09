@@ -16,7 +16,7 @@
 
             <section class="modal-body">
                 <slot name="body">
-                    This is the default body!
+                    <input v-model="title" placeholder="edit me" />
                 </slot>
             </section>
 
@@ -39,9 +39,15 @@
 <script>
 export default {
     name: "TimeEntryModal",
+    data() {
+        return {
+            title:""
+        }
+    },
     methods: {
         close() {
-            this.$emit('close', "mmm");
+            this.$emit('close', this.title);
+            this.title = ""
         },
     },
 }
