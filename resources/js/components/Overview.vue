@@ -88,7 +88,7 @@ export default Overview
 </script>
 
 <template>
-    <div class='overview'>
+    <div class='overview' >
         <div class='overview-sidebar'>
             <div class='overview-sidebar-section'>
                 <h2>Instructions</h2>

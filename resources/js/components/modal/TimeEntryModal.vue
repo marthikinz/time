@@ -16,7 +16,7 @@
 
             <section class="modal-body">
                 <slot name="body">
-                    <input v-model="title" placeholder="edit me" />
+                    <input class="border-0 focus:outline-none " v-model="title" placeholder="edit me..." />
                 </slot>
             </section>
 
