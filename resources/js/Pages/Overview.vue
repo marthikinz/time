@@ -7,7 +7,7 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { INITIAL_EVENTS, createEventId } from '../event-utils'
 import { getHeight } from "../display-utils";
-import TimeEntryModal from "./modal/TimeEntryModal.vue";
+import TimeEntryModal from "../components/modal/TimeEntryModal.vue";
 
 const Overview = defineComponent({
     components: {
